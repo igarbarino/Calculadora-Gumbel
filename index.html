@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Gumbel</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 500px; }
+        label { font-weight: bold; margin-top: 10px; display: block; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px; }
+        button { padding: 10px 15px; background-color: #0056b3; color: white; border: none; cursor: pointer; }
+        .resultados { margin-top: 20px; padding: 15px; background-color: #f4f4f4; border-radius: 5px; }
+    </style>
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+    <h2>Modelo Probabilístico de Gumbel</h2>
+
+    <label for="modelo">Tipo de Distribución:</label>
+    <select id="modelo">
+        <option value="maximo">Gumbel de Máximo</option>
+        <option value="minimo">Gumbel de Mínimo</option>
+    </select>
+
+    <label for="media">Media muestral (μ):</label>
+    <input type="number" id="media" step="any" required>
+
+    <label for="varianza">Varianza (σ²):</label>
+    <input type="number" id="varianza" step="any" required>
+
+    <label for="valorX">Variable a evaluar (x):</label>
+    <input type="number" id="valorX" step="any" required>
+
+    <button onclick="ejecutarModelo()">Calcular Parámetros y Probabilidad</button>
+
+    <div class="resultados">
+        <h3>Resultados Analíticos:</h3>
+        <p id="salidaParametros">Esperando datos de entrada...</p>
+        <p id="salidaProbabilidad"></p>
+    </div>
+
+    <!-- Enlace al motor lógico -->
+    <script src="app.js"></script>
+
+</body>
+</html>
