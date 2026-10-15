@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gumbel-v1';
+const CACHE_NAME = 'gumbel-v2';
 const urlsToCache = [
   './',
   './index.html',
