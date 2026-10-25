@@ -48,7 +48,6 @@ function ejecutarModelo() {
         salidaProb = `<strong>Probabilidad de excedencia P(X > x):</strong> ${probExcedencia.toFixed(6)} <br>
                       <strong>Probabilidad acumulada P(X ≤ x):</strong> ${probIzquierda.toFixed(6)}`;
     }
-// ... [Mantén todo el código superior intacto hasta la definición de salidaProb] ...
 
     let esperanza, mediana;
     const lnln2 = Math.log(Math.log(2)); // Constante para el cuantil 50%
@@ -71,13 +70,8 @@ function ejecutarModelo() {
     `;
     
     document.getElementById("salidaProbabilidad").innerHTML = salidaProb;
-} // <-- Llave de cierre de la función ejecutarModelo()
-    document.getElementById("salidaParametros").innerHTML = `
-        Parámetro de escala (β): ${beta.toFixed(4)} <br>
-        Parámetro de corrimiento/moda (θ): ${theta.toFixed(4)}
-    `;
-    document.getElementById("salidaProbabilidad").innerHTML = salidaProb;
 }
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js')
