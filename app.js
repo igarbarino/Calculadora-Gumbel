@@ -61,12 +61,16 @@ function ejecutarModelo() {
         mediana = theta + (beta * lnln2);
     }
 
+    // Cálculo de la Varianza a partir del parámetro de escala
+    const varianzaCalculada = (Math.pow(Math.PI, 2) / 6) * Math.pow(beta, 2);
+
     // Inyección de resultados ampliados en la interfaz
     document.getElementById("salidaParametros").innerHTML = `
         Parámetro de escala (β): ${beta.toFixed(4)} <br>
         Parámetro de corrimiento/moda (θ): ${theta.toFixed(4)} <br>
         <strong>Media / Esperanza (μ):</strong> ${esperanza.toFixed(4)} <br>
-        <strong>Mediana (x̃):</strong> ${mediana.toFixed(4)}
+        <strong>Mediana (x̃):</strong> ${mediana.toFixed(4)} <br>
+        <strong>Varianza (σ²):</strong> ${varianzaCalculada.toFixed(4)}
     `;
     
     document.getElementById("salidaProbabilidad").innerHTML = salidaProb;
