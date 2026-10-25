@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gumbel-v2';
+const CACHE_NAME = 'gumbel-v3';
 const urlsToCache = [
   './',
   './index.html',
@@ -6,25 +6,32 @@ const urlsToCache = [
   './manifest.json'
 ];
 
-// Instalación: Almacenamiento de archivos en caché
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
+    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
   );
 });
 
-// Interceptación de red: Servir desde caché si se está offline
+// Algoritmo de purga: Elimina memorias caché de versiones anteriores
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== CACHE_NAME) {
+            console.log('Borrando caché obsoleta:', cacheName);
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
+
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response; // Retorna la versión en caché
-        }
-        return fetch(event.request); // Ejecuta petición de red si no está en caché
-      })
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    })
   );
 });
